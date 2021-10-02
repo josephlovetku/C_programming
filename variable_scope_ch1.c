@@ -30,7 +30,7 @@ int main()
 int getline(void)
 {
     int c, i;
-    extern char line[];
+    extern char line[]; // 這裡使用到外在變數, 必須用 extern "宣告"
 
     for (i = 0; i < MAXLINE - 1 && (c=getchar)) != EOF && c != '\n'; ++i)
         line[i] = c;
@@ -46,7 +46,7 @@ int getline(void)
 void copy(void)
 {
     int i;
-    extern char line[], longest[];
+    extern char line[], longest[]; // // 這裡使用到外在變數, 必須用 extern "宣告"
     i = 0;
     while ((longest[i] = line[i]) != '\0')
         ++i;
