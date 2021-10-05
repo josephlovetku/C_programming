@@ -20,27 +20,23 @@
 
 void Candidate::init_uti() 
 {	
-	//int n1, n2;
-	int n1, n2, n3;
+	int n1, n2;
 	random_device rd;
 	static default_random_engine eng(rd());
 	static uniform_int_distribution<unsigned> uni(0, Candidate::utUB);
 	while(1) { 
 		n1 = uni(eng);
 		n2 = uni(eng);
-		n3 = uni(eng);
-		if (n1+n2+n3 <= Candidate::utUB) break;
+		if (n1+n2 <= Candidate::utUB) break;
 	}
 	utSup = n1;
 	utOpp = n2;
-	utSwi = n3;
 }
 
-void Candidate::set_uti(int uts, int uto, int utswi) 
+void Candidate::set_uti(int uts, int uto) 
 {
 	utSup = uts;
 	utOpp = uto;
-	utSwi = utswi;
 }
 
 int Candidate::get_sup() 
@@ -52,11 +48,6 @@ int Candidate::get_opp()
 {
     return utOpp;
 }
-
-int Candidate::get_swi()
-{
-	return utSwi;
-}	
 
 int Candidate::uti_sum() 
 {	
@@ -75,34 +66,21 @@ double Candidate::get_expSW()
 
 void Party::reOrder() 
 {
-	int ut_sup, ut_opp, ut_swi; 
+	int ut_sup, ut_opp; 
 	if (cand2.get_sup() > cand1.get_sup()) { 
 		ut_sup = cand1.get_sup(); 
 		ut_opp = cand1.get_opp();
-        	ut_swi = cand1.get_swi();
-		cand1.set_uti(cand2.get_sup(), cand2.get_opp(), cand2.get_swi());
-		cand2.set_uti(ut_sup, ut_opp, ut_swi);  
+		cand1.set_uti(cand2.get_sup(), cand2.get_opp());
+		cand2.set_uti(ut_sup, ut_opp);  
 	}
 }
 
 bool Game::egoismCheck(Party & pA, Party & pB)
 {
-	if ((pA.cand1.get_opp()+pA.cand1.get_swi() >= min(pB.cand1.get_sup(), pB.cand2.get_sup()))  
-		|| (pA.cand2.get_opp()+pA.cand2.get_swi() >= min(pB.cand1.get_sup(), pB.cand2.get_sup()))  
-		|| (pB.cand1.get_opp()+pB.cand1.get_swi() >= min(pA.cand1.get_sup(), pA.cand2.get_sup()))  
-		|| (pB.cand2.get_opp()+pB.cand2.get_swi() >= min(pA.cand1.get_sup(), pA.cand2.get_sup()))) {
-		return 0;
-	} else { 
-		return 1;
-	}
-}
-
-bool Game::betterThanSwing(Party & pA, Party & pB)
-{
-	if ((pA.cand1.get_swi() >= min(pA.cand1.get_sup(), pA.cand2.get_sup()))  
-		|| (pA.cand2.get_swi() >= min(pA.cand1.get_sup(), pA.cand2.get_sup()))  
-		|| (pB.cand1.get_swi() >= min(pB.cand1.get_sup(), pB.cand2.get_sup()))  
-		|| (pB.cand2.get_swi() >= min(pB.cand1.get_sup(), pB.cand2.get_sup()))) {
+	if ((pA.cand1.get_opp() >= min(pB.cand1.get_sup(), pB.cand2.get_sup()))  
+		|| (pA.cand2.get_opp() >= min(pB.cand1.get_sup(), pB.cand2.get_sup()))  
+		|| (pB.cand1.get_opp() >= min(pA.cand1.get_sup(), pA.cand2.get_sup()))  
+		|| (pB.cand2.get_opp() >= min(pA.cand1.get_sup(), pA.cand2.get_sup()))) {
 		return 0;
 	} else { 
 		return 1;
@@ -131,7 +109,7 @@ void SetExpUti(Candidate & cA, Candidate & cB, string type)
 		prob_cAw = static_cast<double>(cA.uti_sum())/(cA.uti_sum() + cB.uti_sum());
 	}
 	cA.expUti = prob_cAw * cA.utSup + (1-prob_cAw) * cB.utOpp;
-    cA.expSW = prob_cAw * cA.uti_sum();
+    	cA.expSW = prob_cAw * cA.uti_sum();
 	cB.expUti = (1-prob_cAw) * cB.utSup + prob_cAw * cA.utOpp;
 	cB.expSW = (1-prob_cAw) * cB.uti_sum();
 }
