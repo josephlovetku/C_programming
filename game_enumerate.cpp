@@ -4,7 +4,7 @@
 #include <map>
 #include "political_game.h"
 
-#define num_simu 100000000
+#define num_simu 10000000
 
 int main(int argc, char ** argv) {
 	double tmpPoA = 0, maxPoA = 0, maxSW, worstPNESW;
@@ -38,7 +38,7 @@ int main(int argc, char ** argv) {
 	for (size_t i=0; i<num_simu; i++) { 
 		Game g; 
 		// skip the instance that is not egoistic
-		if (!g.egoismCheck(g.A, g.B) || !g.betterThanSwing(g.A, g.B)) continue;
+		if (!g.egoismCheck(g.A, g.B)) continue;
 		
 		g.A.reOrder(); 
 		g.B.reOrder();
