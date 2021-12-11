@@ -1,4 +1,4 @@
-//#include "positions.h"
+#include "positions.h"
 
 int RNA_Stop(char Seq[], int length) // Stop codon: TAA, TAG, or TGA
 {
