@@ -62,7 +62,7 @@ bool findPath(char maze[WIDTH][HEIGHT], int x, int y) {
     return false;
 }
 
-int main(void) {
+int main() {
 
     char maze[WIDTH][HEIGHT] = {
         {' ', ' ', 'x', 'x', 'x', 'x', 'x', 'x'},
