@@ -16,6 +16,7 @@ int main()
 	}
 	dna[size] = '\0';
 	printf("size = %ld\n", size);
+	free(dna)
 	return 0;
 }
  
