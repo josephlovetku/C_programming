@@ -1,9 +1,15 @@
 /******************************************************************************
 
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
-Code, Compile, Run and Debug online from anywhere in world.
+Turn numbers into digits (seven-segement display)
+Characters other than digits are ignored
+
+Example: 
+Input: 
+491-9014
+Output: 
+     _           _   _   _              
+|_| |_|   |     |_| | |  _| |_|         
+  |  _|   |      _| |_| |_    | 
 
 *******************************************************************************/
 #include <stdio.h>
@@ -13,7 +19,7 @@ void clear_digits_array(void);
 void process_digit(int digit, int position);
 void print_digits_array(void);
 char digits[4][MAX_DIGITS*4];
-const int segment[MAX_DIGITS][7] = {
+const int segment[10][7] = {
     {1,1,1,0,1,1,1}, {0,0,1,0,0,1,0}, {1,0,1,1,1,0,1}, {1,0,1,1,0,1,1}, {0,1,1,1,0,1,0},
     {1,1,0,1,0,1,1}, {1,1,0,1,1,1,1}, {1,0,1,0,0,1,0}, {1,1,1,1,1,1,1}, {1,1,1,1,0,1,1}
 };
