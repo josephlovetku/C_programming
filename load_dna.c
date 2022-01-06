@@ -11,12 +11,12 @@ int main()
 			dna[size++] = ch;
 		if (size % batch_size == batch_size-1) {
 			printf("** re-allocated again (%ld) **\n", size+1);
-			dna = realloc(dna, size+batch_size);
+			dna = (char *)realloc(dna, size+batch_size);
 		}
 	}
 	dna[size] = '\0';
 	printf("size = %ld\n", size);
-	free(dna)
+	free(dna);
 	return 0;
 }
  
