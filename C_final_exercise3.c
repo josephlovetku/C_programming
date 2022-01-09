@@ -19,7 +19,6 @@ int main()
 	}*/
 	printf("count = %d\n", count);
 	find_two_largest(arr, count, &max, &secMax);
-	
 	printf("largest: %d, second largest: %d\n", max, secMax);
 }
 
