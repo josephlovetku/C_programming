@@ -7,8 +7,8 @@ int isSubstr(char *s, char *t);
 int main()
 {
 	int result = 0;
-	char str1[100] = "abcdefg";
-	char str2[100] = "efg"; 
+	char str1[] = "abcdefg";
+	char str2[] = "efg"; 
 	int size = strlen(str1);
 	result = isSubstr(str1, str2);
 	
