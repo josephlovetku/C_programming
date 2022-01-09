@@ -36,7 +36,3 @@ int HornersRule(int c[], int i, int d, int x)
     else 
         return c[i] + x*HornerRule(c, i+1, d, x);
 }
-
-
-
-
